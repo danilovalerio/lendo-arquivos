@@ -31,13 +31,11 @@ public class Programa {
 		*/
 		
 		String path = "C:\\arquivos\\in.txt";
-		FileReader fr = null;
-		BufferedReader br = null;
-		
-		try {
-			fr = new FileReader(path);
-			//abstracao do file reader e é mais rápida
-			br = new BufferedReader(fr);
+			
+		//try catch resources, os recusos passados diretamente no bloco try
+		//executa o fechamento dos mesmo também
+		//DISPONÍVEL SOMENTE A PARTIR DO JAVA 7
+		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			
 			String line = br.readLine();
 			
@@ -50,25 +48,7 @@ public class Programa {
 		catch (IOException e) {
 			System.out.println("Error: "+ e.getMessage());
 		}		
-		finally {
-			try { 
-				if(br != null) {
-					br.close();
-				}
-				
-				if(fr != null) {
-					fr.close();
-				}
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-			
-		}
 		
-		
-
 	}
 
 }
